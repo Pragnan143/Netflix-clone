@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Movie from "./Movie";
-const Row = ({ title, fetchURL }) => {
+const Row = ({ title, fetchURL, RowId }) => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -11,27 +11,35 @@ const Row = ({ title, fetchURL }) => {
     });
   }, [fetchURL]);
 
-  const slideLeft = () => {};
-  const slideRight = () => {};
+  const slideLeft = () => {
+    const slider = document.getElementById("slider" + RowId);
+    slider.scrollLeft -= 500;
+  };
+  const slideRight = () => {
+    const slider = document.getElementById("slider" + RowId);
+    slider.scrollLeft += 500;
+  };
 
   return (
     <>
       <h2 className="text-white font-bold md:text-xl p-4">{title}</h2>
-      <div className="relative flex items-center">
+      <div className="relative flex items-center group">
         <MdChevronLeft
-          className="bg-white rounded-full hover:opacity-100 opacity-50 left-2 z-[100] cursor-pointer absolute"
+          onClick={slideLeft}
+          className="bg-white rounded-full hover:opacity-100 group-hover:block opacity-50 left-4  z-[100] cursor-pointer absolute hidden"
           size={40}
         />
         <div
-          id={"slider"}
-          className="w-full h-full overflow-x-scroll whitespace-nowrap scrollbar-hide"
+          id={"slider" + RowId}
+          className="w-full h-full overflow-x-scroll scroll-smooth whitespace-nowrap scrollbar-hide"
         >
           {movies.map((item, id) => (
             <Movie key={id} item={item} />
           ))}
-        </div>{" "}
+        </div>
         <MdChevronRight
-          className="bg-white rounded-full hover:opacity-100 opacity-50 right-2 z-[100] cursor-pointer absolute  "
+          onClick={slideRight}
+          className="bg-white rounded-full hover:opacity-100 group-hover:block opacity-50 right-4  z-[99] cursor-pointer absolute hidden"
           size={40}
         />
       </div>
