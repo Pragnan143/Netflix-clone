@@ -18,7 +18,10 @@ const Row = ({ title, fetchURL }) => {
     <>
       <h2 className="text-white font-bold md:text-xl p-4">{title}</h2>
       <div className="relative flex items-center">
-        {/* <MdChevronLeft className="text-white absolute  text-6xl" /> */}
+        <MdChevronLeft
+          className="bg-white rounded-full hover:opacity-100 opacity-50 left-2 z-[100] cursor-pointer absolute"
+          size={40}
+        />
         <div
           id={"slider"}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scrollbar-hide"
@@ -27,7 +30,10 @@ const Row = ({ title, fetchURL }) => {
             <Movie key={id} item={item} />
           ))}
         </div>{" "}
-        {/* <MdChevronRight className="text-white absolute  text-6xl" /> */}
+        <MdChevronRight
+          className="bg-white rounded-full hover:opacity-100 opacity-50 right-2 z-[100] cursor-pointer absolute  "
+          size={40}
+        />
       </div>
     </>
   );
